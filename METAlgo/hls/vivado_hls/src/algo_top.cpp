@@ -43,57 +43,6 @@ void unpackInputLink(hls::stream<algo::axiword576> &ilink, Tower towers[TOWERS_I
 
   return;
 }
-/*void uil(hls::stream<algo::axiword576> &ilink, ap_fixed<16,10> towers[32]) {
-#pragma HLS PIPELINE II=N_WORDS_PER_FRAME
-#pragma HLS ARRAY_PARTITION variable=towers complete dim=0
-#pragma HLS INTERFACE axis port=ilink
-#pragma HLS INLINE
-
-  ap_uint<576> word_576b_;
-
-//#ifndef __SYNTHESIS__
-  // Avoid simulation warnings
-  //if (link.empty()) return;
-//#endif
-
-  word_576b_ = ilink.read().data;
-
-  	towers[0]=word_576b_( 17,   0);
-  	towers[1]=word_576b_( 35,  18) ;
-	towers[2]=word_576b_( 53,  36) ;
-	towers[3]=ap_fixed<16,10>(word_576b_( 71,  54)) ;
-	towers[4]=ap_fixed<16,10>(word_576b_( 89,  72)) ;
-	towers[5]=word_576b_( 107, 90) ;
-	towers[6]=word_576b_( 125, 108) ;
-	towers[7]=word_576b_( 143, 126) ;
-	towers[8]=word_576b_( 161, 144) ;
-	towers[9]=word_576b_( 179, 162) ;
-	towers[10]=word_576b_( 197, 180) ;
-	towers[11]=word_576b_( 215, 198) ;
-	towers[12]=word_576b_( 233, 216) ;
-	towers[13]=word_576b_( 251, 234) ;
-	towers[14]=word_576b_( 269, 252) ;
-	towers[15]=word_576b_( 287, 270) ;
-	towers[16]=word_576b_( 305, 288) ;
-	towers[17]=word_576b_( 323, 306) ;
-	towers[18]=word_576b_( 341, 324) ;
-	towers[19]=word_576b_( 359, 342) ;
-	towers[20]=word_576b_( 377, 360) ;
-	towers[21]=word_576b_( 395, 378) ;
-	towers[22]=word_576b_( 413, 396) ;
-	towers[23]=word_576b_( 431, 414) ;
-  	towers[24]=word_576b_( 449, 432) ;
-  	towers[25]=word_576b_( 467, 450) ;
-  	towers[26]=word_576b_( 485, 468) ;
-  	towers[27]=word_576b_( 503, 486) ;
-  	towers[28]=word_576b_( 521, 504) ;
-  	towers[29]=word_576b_( 539, 522) ;
-  	towers[30]=word_576b_( 557, 540) ;
-  	towers[31]=word_576b_( 575, 558) ;
-
-  return;
-}*/
-
 void packOutput(double a[32], hls::stream<algo::axiword576> &olink){
 #pragma HLS PIPELINE II=N_OUTPUT_WORDS_PER_FRAME
 #pragma HLS ARRAY_PARTITION variable=a complete dim=0
@@ -102,7 +51,7 @@ void packOutput(double a[32], hls::stream<algo::axiword576> &olink){
 
   ap_uint<576> word_576b_;
 
-  /*word_576b_( 17,   0) = (ap_fixed<16,10,AP_RND>) a[0];
+  word_576b_( 17,   0) = (ap_fixed<16,10,AP_RND>) a[0];
   word_576b_( 35,  18) = (ap_fixed<16,10,AP_RND>) a[1];
   word_576b_( 53,  36) = (ap_fixed<16,10,AP_RND>) a[2];
   word_576b_( 71,  54) = (ap_fixed<16,10,AP_RND>) a[3];
@@ -133,7 +82,7 @@ void packOutput(double a[32], hls::stream<algo::axiword576> &olink){
   word_576b_( 521, 504) = (ap_fixed<16,10,AP_RND>) a[28];
   word_576b_( 539, 522) = (ap_fixed<16,10,AP_RND>) a[29];
   word_576b_( 557, 540) = (ap_fixed<16,10,AP_RND>) a[30];
-  word_576b_( 575, 558) = (ap_fixed<16,10,AP_RND>) a[31];*/
+  word_576b_( 575, 558) = (ap_fixed<16,10,AP_RND>) a[31];
     axiword576 r; r.last = 0; r.user = 0;
   r.data = word_576b_;
   
