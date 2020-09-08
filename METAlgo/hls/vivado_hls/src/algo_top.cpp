@@ -90,33 +90,6 @@ void packOutput(double a[32], hls::stream<algo::axiword576> &olink){
 
   return ;
 }
-/*double sin(double h)
-{
-	double ha = h * 3.14159265359 / 180;
-	double f = ha * ha * ha / 6;
-	double s = ha * ha * ha * ha * ha / 120;
-	double d = ha * ha * ha * ha * ha * ha * ha / 5040;
-	double co = ha * ha * ha * ha * ha * ha * ha * ha * ha / 362880;
-	double j= ha * ha * ha * ha * ha * ha * ha * ha * ha * ha * ha / 39916800;
-	double o = ha * ha * ha * ha * ha * ha * ha * ha * ha * ha * ha * ha * ha / 6227020800;
-	double out = ha - f + s - d + co - j + o;
-	//cout << out << endl;
-	return out;
-}
-double cos(double ha)
-{
-	double h = ha * 3.14159265359 / 180;
-	double f = h * h / 2;
-	double s = h * h * h * h / 24;
-	double d = h * h * h * h * h * h / 720;
-	double co = h * h * h * h * h * h * h * h / 40320;
-	double j = h * h * h * h * h * h * h * h * h * h / 3628800;
-	double o = h * h * h * h * h * h * h * h * h * h * h * h / 479001600;
-	double out = 1 - f + s - d + co - j + o;
-	//cout << out << endl;
-	return out;
-}*/
-
 void algo_top(hls::stream<axiword576> link_in[N_INPUT_LINKS], hls::stream<axiword576> link_out[N_OUTPUT_LINKS]) {
 #pragma HLS INTERFACE axis port=link_in
 #pragma HLS INTERFACE axis port=link_out
@@ -157,33 +130,6 @@ void algo_top(hls::stream<axiword576> link_in[N_INPUT_LINKS], hls::stream<axiwor
 
 	  double Ey;double Ex;
   		double j;
-  		/*double c; double d; double e; double f; double g; double h; double i; double k;
-  		double l; double m; double n; double o; double p; double q; double r; double s; double t;
-  		double u; double v; double w; double x; double y; double z; double cc; double dd; double ee;
-  		double ff; double gg; double hh; double ii; double jj; double kk;
-  		c=towers[b][0].tower_et() + towers[b][1].tower_et();
-  		d=towers[b][2].tower_et() + towers[b][3].tower_et();
-  		e=towers[b][4].tower_et() + towers[b][5].tower_et();
-  		f=towers[b][6].tower_et() + towers[b][7].tower_et();
-  		g=towers[b][8].tower_et() + towers[b][9].tower_et();
-  		h=towers[b][10].tower_et() + towers[b][11].tower_et();
-  		i=towers[b][12].tower_et() + towers[b][13].tower_et();
-  		k=towers[b][14].tower_et() + towers[b][15].tower_et();
-  		l=towers[b][16].tower_et() + towers[b][17].tower_et();
-  		m=towers[b][18].tower_et() + towers[b][19].tower_et();
-  		n=towers[b][20].tower_et() + towers[b][21].tower_et();
-  		o=towers[b][22].tower_et() + towers[b][23].tower_et();
-  		p=towers[b][24].tower_et() + towers[b][25].tower_et();
-  		q=towers[b][26].tower_et() + towers[b][27].tower_et();
-  		r=towers[b][28].tower_et() + towers[b][29].tower_et();
-  		s=towers[b][30].tower_et() + towers[b][31].tower_et();
-  		t=towers[b][32].tower_et() + towers[b][33].tower_et();
-  		u=c+d; v=e+f; w=g+h; x=i+k; y=l+m; z=n+o; cc=p+q; dd=r+s;
-  		ee=u+v; ff=w+x; gg=y+z; hh=cc+dd;
-  		ii=ee+ff; jj=gg+hh;
-  		kk=ii+jj;
-  		j=kk+t;*/
-
   		 j = towers[b][0].tower_et() + towers[b][1].tower_et() + towers[b][2].tower_et() + towers[b][3].tower_et() +
   				 towers[b][4].tower_et() + towers[b][5].tower_et() + towers[b][6].tower_et() + towers[b][7].tower_et() +
 				 towers[b][8].tower_et() + towers[b][9].tower_et() + towers[b][10].tower_et() + towers[b][11].tower_et() +
