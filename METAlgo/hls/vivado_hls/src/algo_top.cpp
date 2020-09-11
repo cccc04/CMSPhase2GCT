@@ -16,10 +16,10 @@ void unpackInputLink(hls::stream<algo::axiword576> &ilink, Tower towers[TOWERS_I
 
   ap_uint<576> word_576b_;
 
-//#ifndef __SYNTHESIS__
-  // Avoid simulation warnings
-  //if (link.empty()) return;
-//#endif
+#ifndef __SYNTHESIS__
+   //Avoid simulation warnings
+  if (ilink.empty()) return;
+#endif
 
   word_576b_ = ilink.read().data;
 
@@ -43,7 +43,8 @@ void unpackInputLink(hls::stream<algo::axiword576> &ilink, Tower towers[TOWERS_I
 
   return;
 }
-void packOutput(double a[32], hls::stream<algo::axiword576> &olink){
+
+void packOutput(ap_uint<340> a[0], hls::stream<algo::axiword576> &olink){
 #pragma HLS PIPELINE II=N_OUTPUT_WORDS_PER_FRAME
 #pragma HLS ARRAY_PARTITION variable=a complete dim=0
 #pragma HLS INTERFACE axis port=olink
@@ -51,38 +52,9 @@ void packOutput(double a[32], hls::stream<algo::axiword576> &olink){
 
   ap_uint<576> word_576b_;
 
-  word_576b_( 17,   0) = (ap_fixed<16,10,AP_RND>) a[0];
-  word_576b_( 35,  18) = (ap_fixed<16,10,AP_RND>) a[1];
-  word_576b_( 53,  36) = (ap_fixed<16,10,AP_RND>) a[2];
-  word_576b_( 71,  54) = (ap_fixed<16,10,AP_RND>) a[3];
-  word_576b_( 89,  72) = (ap_fixed<16,10,AP_RND>) a[4];
-  word_576b_( 107, 90) = (ap_fixed<16,10,AP_RND>) a[5];
-  word_576b_( 125, 108) = (ap_fixed<16,10,AP_RND>) a[6];
-  word_576b_( 143, 126) = (ap_fixed<16,10,AP_RND>) a[7];
-  word_576b_( 161, 144) = (ap_fixed<16,10,AP_RND>) a[8];
-  word_576b_( 179, 162) = (ap_fixed<16,10,AP_RND>) a[9];
-  word_576b_( 197, 180) = (ap_fixed<16,10,AP_RND>) a[10];
-  word_576b_( 215, 198) = (ap_fixed<16,10,AP_RND>) a[11];
-  word_576b_( 233, 216) = (ap_fixed<16,10,AP_RND>) a[12];
-  word_576b_( 251, 234) = (ap_fixed<16,10,AP_RND>) a[13];
-  word_576b_( 269, 252) = (ap_fixed<16,10,AP_RND>) a[14];
-  word_576b_( 287, 270) = (ap_fixed<16,10,AP_RND>) a[15];
-  word_576b_( 305, 288) = (ap_fixed<16,10,AP_RND>) a[16];
-  word_576b_( 323, 306) = (ap_fixed<16,10,AP_RND>) a[17];
-  word_576b_( 341, 324) = (ap_fixed<16,10,AP_RND>) a[18];
-  word_576b_( 359, 342) = (ap_fixed<16,10,AP_RND>) a[19];
-  word_576b_( 377, 360) = (ap_fixed<16,10,AP_RND>) a[20];
-  word_576b_( 395, 378) = (ap_fixed<16,10,AP_RND>) a[21];
-  word_576b_( 413, 396) = (ap_fixed<16,10,AP_RND>) a[22];
-  word_576b_( 431, 414) = (ap_fixed<16,10,AP_RND>) a[23];
-  word_576b_( 449, 432) = (ap_fixed<16,10,AP_RND>) a[24];
-  word_576b_( 467, 450) = (ap_fixed<16,10,AP_RND>) a[25];
-  word_576b_( 485, 468) = (ap_fixed<16,10,AP_RND>) a[26];
-  word_576b_( 503, 486) = (ap_fixed<16,10,AP_RND>) a[27];
-  word_576b_( 521, 504) = (ap_fixed<16,10,AP_RND>) a[28];
-  word_576b_( 539, 522) = (ap_fixed<16,10,AP_RND>) a[29];
-  word_576b_( 557, 540) = (ap_fixed<16,10,AP_RND>) a[30];
-  word_576b_( 575, 558) = (ap_fixed<16,10,AP_RND>) a[31];
+
+  word_576b_( 339,   0) = (ap_uint<340>) a[0];
+  word_576b_( 575, 340) = 0;
     axiword576 r; r.last = 0; r.user = 0;
   r.data = word_576b_;
   
@@ -90,6 +62,7 @@ void packOutput(double a[32], hls::stream<algo::axiword576> &olink){
 
   return ;
 }
+
 void algo_top(hls::stream<axiword576> link_in[N_INPUT_LINKS], hls::stream<axiword576> link_out[N_OUTPUT_LINKS]) {
 #pragma HLS INTERFACE axis port=link_in
 #pragma HLS INTERFACE axis port=link_out
@@ -114,9 +87,9 @@ void algo_top(hls::stream<axiword576> link_in[N_INPUT_LINKS], hls::stream<axiwor
   }
 
    // Step 2: MET Algo goes here
-  double a[TOWERS_IN_PHI];
+  ap_uint<340> Eys[TOWERS_IN_PHI];
 #pragma HLS ARRAY_PARTITION variable=a complete dim=0
-  double aa[TOWERS_IN_PHI];
+  ap_uint<340> Exs[TOWERS_IN_PHI];
 #pragma HLS ARRAY_PARTITION variable=aa complete dim=0
   double sinphi[TOWERS_IN_PHI]={0.04362,0.13053,0.21644,0.30071,0.38268,0.46175,0.53730,0.60876,0.67559,0.73728,0.79335,0.84339,
   0.88701,0.92388,0.95372,0.97630,0.99144,0.99905,0.99905,0.99144,0.97630,0.95372,0.92388,0.88701,0.84339,0.79335,0.73728,
@@ -128,9 +101,9 @@ void algo_top(hls::stream<axiword576> link_in[N_INPUT_LINKS], hls::stream<axiwor
 #pragma HLS ARRAY_PARTITION variable=cosphi complete dim=0
   for (int b = 0; b < 32; b++) {
 
-	  double Ey;double Ex;
-  		double j;
-  		 j = towers[b][0].tower_et() + towers[b][1].tower_et() + towers[b][2].tower_et() + towers[b][3].tower_et() +
+	  ap_uint<340> Ey;ap_uint<340> Ex;
+  		ap_uint<340> j;
+  	 		 j = towers[b][0].tower_et() + towers[b][1].tower_et() + towers[b][2].tower_et() + towers[b][3].tower_et() +
   				 towers[b][4].tower_et() + towers[b][5].tower_et() + towers[b][6].tower_et() + towers[b][7].tower_et() +
 				 towers[b][8].tower_et() + towers[b][9].tower_et() + towers[b][10].tower_et() + towers[b][11].tower_et() +
 				 towers[b][12].tower_et() + towers[b][13].tower_et() + towers[b][14].tower_et() + towers[b][15].tower_et() +
@@ -141,20 +114,16 @@ void algo_top(hls::stream<axiword576> link_in[N_INPUT_LINKS], hls::stream<axiwor
 				 towers[b][32].tower_et() + towers[b][33].tower_et();
   		Ey = sinphi[b]*j;
   		//cout << Ey << endl;
-  		a[b] = Ey;
+  		Eys[b] = Ey;
   		Ex = cosphi[b]*j;
-  		aa[b] = Ex;
+  		Exs[b] = Ex;
   		//cout << Ex <<endl;
   	}
   // Step 3: Pack the outputs
-  	  packOutput(&a[0],link_out[0]);
-  	  packOutput(&aa[0],link_out[1]);
-//  for (size_t olink = 0; olink < N_OUTPUT_LINKS/2; olink++) {
-//#pragma LOOP UNROLL
-//#pragma HLS latency min=1
-//    size_t iPosEta = olink;
-//    size_t iNegEta = olink + (N_OUTPUT_LINKS/2);
-//    packOutput(&towers[olink][0], link_out[iNegEta]);
-//    packOutput(&towers[olink][TOWERS_IN_ETA/2], link_out[iPosEta]);
 
+  	  for (size_t olink = 0; olink < 32; olink++) {
+#pragma LOOP UNROLL
+#pragma HLS latency min=1
+        packOutput(&Exs[olink],link_out[olink]);
+    packOutput(&Eys[olink],link_out[olink+32]);}
 }
