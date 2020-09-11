@@ -87,10 +87,10 @@ void algo_top(hls::stream<axiword576> link_in[N_INPUT_LINKS], hls::stream<axiwor
   }
 
    // Step 2: MET Algo goes here
-  ap_uint<340> Eys[TOWERS_IN_PHI];
-#pragma HLS ARRAY_PARTITION variable=a complete dim=0
   ap_uint<340> Exs[TOWERS_IN_PHI];
-#pragma HLS ARRAY_PARTITION variable=aa complete dim=0
+#pragma HLS ARRAY_PARTITION variable=Exs complete dim=0
+  ap_uint<340> Eys[TOWERS_IN_PHI];
+#pragma HLS ARRAY_PARTITION variable=Eys complete dim=0
   double sinphi[TOWERS_IN_PHI]={0.04362,0.13053,0.21644,0.30071,0.38268,0.46175,0.53730,0.60876,0.67559,0.73728,0.79335,0.84339,
   0.88701,0.92388,0.95372,0.97630,0.99144,0.99905,0.99905,0.99144,0.97630,0.95372,0.92388,0.88701,0.84339,0.79335,0.73728,
   0.67559,0.60876,0.53730,0.46175,0.38268};
