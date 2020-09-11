@@ -28,7 +28,7 @@ const int N_WORDS_PER_FRAME	= 9;
 // -- For only one eta half
 #define N_INPUT_LINKS	64 
 // -- N_OUTPUT_LINKS = TOWERS_IN_PHI*2 
-#define N_OUTPUT_LINKS	2
+#define N_OUTPUT_LINKS	64
 
 #endif
  /* !__ALGO_TOP_PARAMETERS_H__ */
