@@ -165,9 +165,9 @@ void algo_top(hls::stream<axiword576> link_in[N_INPUT_LINKS], hls::stream<axiwor
 				 towers[b][32].tower_et() + towers[b][33].tower_et();
   		Ey = sinphi[b]*j;
   		//cout << Ey << endl;
-  		Eys[b-4] = Ey*1000;
+  		Eys[b-4] = Ey;
   		Ex = cosphi[b]*j;
-  		Exs[b-4] = Ex*1000;
+  		Exs[b-4] = Ex;
   		//cout << Ex <<endl;
   	}
   // Step 3: Pack the outputs
